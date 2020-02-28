@@ -1,0 +1,14 @@
+---
+
+- name: Update / Reboot Hosts
+  hosts: all
+  become: yes
+  become_user: root
+
+  tasks:  
+    - name: Update openSUSE Tumbleweed
+      zypper: name="*" state=dist-upgrade update_cache=yes
+      when: ansible_distribution == "openSUSE Tumbleweed"
+
+    - name: Reboot
+      reboot:
